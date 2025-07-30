@@ -1,6 +1,12 @@
+import { authConfig } from "@/configs/auth";
 import { AppError } from "@/utils/AppError";
-import { X509Certificate } from "crypto";
 import { Request, Response, NextFunction } from "express";
+import { verify } from "jsonwebtoken";
+
+interface TokenPayload {
+  sub: string;
+  role: string;
+}
 
 function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
   const authHeader = request.headers.authorization
@@ -9,9 +15,14 @@ function ensureAuthenticated(request: Request, response: Response, next: NextFun
     throw new AppError("JWT token não informado", 401)
   }
 
-  const [,token] = authHeader.split(" ")
+  const [, token] = authHeader.split(" ")
 
-  console.log(token)
+  const { sub: user_id, role } = verify(token, authConfig.jwt.secret) as TokenPayload
+
+  request.user = {
+    id: String(user_id),
+    role,
+  }
 
   return next()
 }

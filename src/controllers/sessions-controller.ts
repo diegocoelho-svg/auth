@@ -8,9 +8,10 @@ class SessionsController {
     const { username, password } = request.body
 
     const fakeUser = {
-      id: 1,
+      id: "1",
       username: "rodrigo",
       password: "123456",
+      role: "customer",
     }
 
     if (username !== fakeUser.username || password !== fakeUser.password) {
@@ -18,7 +19,7 @@ class SessionsController {
     }
 
     const { secret, expiresIn } = authConfig.jwt
-    const token = sign({}, secret, {
+    const token = sign({ role: fakeUser.role }, secret, {
       expiresIn,
       subject: String(fakeUser.id),
     })
