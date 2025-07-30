@@ -11,7 +11,7 @@ class SessionsController {
       id: "1",
       username: "rodrigo",
       password: "123456",
-      role: "customer",
+      role: "costumer",
     }
 
     if (username !== fakeUser.username || password !== fakeUser.password) {
