@@ -1,16 +1,16 @@
-# Fullstack Auth Template
+# Estudo de Autenticação JWT
 
-Um template completo de autenticação para aplicações Node.js com Express, TypeScript e JWT.
+Projeto de estudo para aplicar e compreender conceitos de autenticação JWT com Node.js, Express e TypeScript.
 
 ## 📋 Sobre o Projeto
 
-Este é um template de autenticação robusto que inclui:
+Este é um projeto educacional focado no aprendizado de:
 
-- 🔐 Autenticação JWT
-- 🛡️ Middleware de autorização baseado em roles
-- 📝 Sistema de produtos com controle de acesso
-- ⚡ TypeScript para type safety
-- 🚀 Express.js como framework web
+- 🔐 **Autenticação JWT** - Como implementar e validar tokens
+- 🛡️ **Middleware de autorização** - Controle de acesso baseado em roles
+- 📝 **Proteção de rotas** - Implementação de endpoints públicos e privados
+- ⚡ **TypeScript** - Tipagem estática para maior segurança
+- 🚀 **Express.js** - Estruturação de APIs REST
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -53,7 +53,7 @@ src/
 1. Clone o repositório:
 ```bash
 git clone <url-do-repositorio>
-cd fullstack-auth-template
+cd estudo-jwt
 ```
 
 2. Instale as dependências:
@@ -128,11 +128,13 @@ O template inclui um sistema de autorização baseado em roles:
 
 ## 📝 Usuário de Teste
 
-Para fins de demonstração, existe um usuário fake configurado:
+Para fins de estudo, existe um usuário fake configurado no código:
 
 - **Username:** rodrigo
 - **Password:** 123456
 - **Role:** costumer
+
+> ⚠️ **Importante**: Este é apenas um usuário hardcoded para fins educacionais. Em um projeto real, você integraria com um banco de dados e usaria hash nas senhas.
 
 ## 🔧 Configuração JWT
 
@@ -144,27 +146,64 @@ O token JWT é configurado com:
 
 - `npm run dev`: Executa o projeto em modo de desenvolvimento com hot reload
 
-## 🤝 Contribuindo
+## 📚 Conceitos Aprendidos
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+Este projeto aborda os seguintes conceitos importantes:
+
+### 🔐 JWT (JSON Web Token)
+- Estrutura de um token JWT (Header, Payload, Signature)
+- Como gerar e assinar tokens
+- Validação e verificação de tokens
+- Configuração de expiração
+
+### 🛡️ Middlewares de Segurança
+- `ensureAuthenticated`: Validação de token JWT
+- `verifyUserAuthorization`: Controle de acesso baseado em roles
+- Tratamento de erros de autenticação
+
+### 🚪 Controle de Acesso
+- Rotas públicas vs protegidas
+- Sistema de roles/permissões
+- Headers de autorização (Bearer Token)
+
+## 🎯 Para Estudar
+
+### Testando a API
+1. Faça login para obter um token:
+```bash
+curl -X POST http://localhost:3333/sessions \
+  -H "Content-Type: application/json" \
+  -d '{"username": "rodrigo", "password": "123456"}'
+```
+
+2. Use o token para acessar rotas protegidas:
+```bash
+curl -X POST http://localhost:3333/products \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json"
+```
+
+### Pontos de Atenção
+- ⚠️ **Senhas em texto plano**: Para estudo apenas! Use bcrypt em produção
+- ⚠️ **Usuário hardcoded**: Integre com banco de dados real
+- ⚠️ **Secret simples**: Use secrets mais complexos e seguros
+
+## 🔮 Evoluções Possíveis
+
+Para aprofundar o estudo, considere implementar:
+
+- [ ] **Hash de senhas** com bcrypt
+- [ ] **Banco de dados** (PostgreSQL, MongoDB)
+- [ ] **Refresh tokens** para renovação automática
+- [ ] **Validação de dados** com Joi ou Zod
+- [ ] **Rate limiting** para prevenir ataques
+- [ ] **Logs de segurança**
+- [ ] **Testes automatizados**
 
 ## 📄 Licença
 
-Este projeto está sob a licença ISC. Veja o arquivo `package.json` para mais detalhes.
-
-## 🔮 Próximos Passos
-
-- [ ] Integração com banco de dados
-- [ ] Hash de senhas com bcrypt
-- [ ] Refresh tokens
-- [ ] Validação de dados com Joi ou Zod
-- [ ] Testes unitários e de integração
-- [ ] Documentação da API com Swagger
+Este projeto está sob a licença ISC - veja o arquivo `package.json` para detalhes.
 
 ---
 
-⭐ Se este template foi útil para você, considere dar uma estrela no repositório!
+📖 **Projeto desenvolvido para fins educacionais e estudo de conceitos de autenticação JWT**
